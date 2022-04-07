@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="purple_200">#FFBB86FC</color>
-  <color name="purple_500">#FF6200EE</color>
-  <color name="purple_700">#FF3700B3</color>
-  <color name="teal_200">#FF03DAC5</color>
-  <color name="teal_700">#FF018786</color>
   <color name="black">#FF000000</color>
   <color name="white">#FFFFFFFF</color>
+  <color name="gray1">#403D3D</color>
+  <color name="gray2">#656363</color>
+  <color name="gray3">#918D8D</color>
+  <color name="grass">#9BCC50</color>
+  <color name="poison">#B97FC9</color>
+  <color name="fire">#FD7D24</color>
+  <color name="water">#4592C4</color>
+  <color name="bug">#729F3F</color>
+  <color name="normal">#A4ACAF</color>
+  <color name="electric">#EED535</color>
+  <color name="fairy">#FDB9E9</color>
+  <color name="fighting">#D56723</color>
+  <color name="psychic">#F366B9</color>
+  <color name="rock">#A38C21</color>
+  <color name="steel">#9EB7B8</color>
+  <color name="ice">#51C4E7</color>
+  <color name="ghost">#7B62A3</color>
+  <color name="dark">#707070</color>
+  <color name="flying_gra_1">#3DC7EF</color>
+  <color name="flying_gra_2">#BDB9B8</color>
+  <color name="ground_gra_1">#F7DE3F</color>
+  <color name="ground_gra_2">#AB9842</color>
+  <color name="dragon_gra_1">#53A4CF</color>
+  <color name="dragon_gra_2">#F16E57</color>
 </resources>

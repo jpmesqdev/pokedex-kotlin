@@ -1,3 +1,7 @@
 <resources>
   <string name="app_name">Pokedex</string>
+  <string name="type_title">Select Pokémon type</string>
+  <string name="label_mock">Label</string>
+  <string name="pokemon_type_title">List of pokemon by some type</string>
+
 </resources>
