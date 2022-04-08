@@ -26,15 +26,13 @@ class TypeAdapter(
 ) : RecyclerView.Adapter<TypeAdapter.TypeHolder>() {
 
     class TypeHolder(itemView: View, context: Context, dataSet: List<PokemonType>) : RecyclerView.ViewHolder(itemView) {
-        val typeName: TextView
-        val typeImg: ImageView
-        init {
-            typeName = itemView.findViewById(R.id.type_txt_name)
-            typeImg = itemView.findViewById(R.id.type_img)
+        val typeName: TextView = itemView.findViewById(R.id.type_txt_name)
+        val typeImg: ImageView = itemView.findViewById(R.id.type_img)
 
+        init {
             itemView.setOnClickListener {
                 val intent = Intent(context, PokemonActivity::class.java).apply {
-                    putExtra("URL", dataSet.get(adapterPosition).url)
+                    putExtra("URL", dataSet[adapterPosition].url)
                 }
                 context.startActivity(intent)
             }
@@ -51,16 +49,16 @@ class TypeAdapter(
     }
 
     override fun onBindViewHolder(holder: TypeHolder, position: Int) {
-        holder.typeName.text = dataSet.get(position).name
-        holder.typeImg.setImageResource(getTypeIconByName(dataSet.get(position).name))
+        holder.typeName.text = dataSet[position].name
+        holder.typeImg.setImageResource(getTypeIconByName(dataSet[position].name))
     }
 
     override fun getItemCount(): Int {
         return dataSet.size
     }
 
-    fun getTypeIconByName(name: String): Int {
-        var icon = when(name) {
+    private fun getTypeIconByName(name: String): Int {
+        val icon = when(name) {
             "bug" -> R.drawable.type_bug
             "dark" -> R.drawable.type_dark
             "dragon" -> R.drawable.type_dragon
