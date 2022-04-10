@@ -2,19 +2,16 @@ package com.devdroid.pokedex.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.devdroid.pokedex.MainActivity
 import com.devdroid.pokedex.PokemonActivity
 import com.devdroid.pokedex.R
 import com.devdroid.pokedex.model.PokemonType
-import com.devdroid.pokedex.model.PokemonTypeList
+import java.util.*
 
 /**
  * Created by lovej on 03/04/2022.
@@ -49,15 +46,19 @@ class TypeAdapter(
     }
 
     override fun onBindViewHolder(holder: TypeHolder, position: Int) {
-        holder.typeName.text = dataSet[position].name
-        holder.typeImg.setImageResource(getTypeIconByName(dataSet[position].name))
+        holder.typeName.text = dataSet[position].name.replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase(
+                Locale.getDefault()
+            ) else it.toString()
+        }
+        getTypeIconByName(dataSet[position].name)?.let { holder.typeImg.setImageResource(it) }
     }
 
     override fun getItemCount(): Int {
         return dataSet.size
     }
 
-    private fun getTypeIconByName(name: String): Int {
+    private fun getTypeIconByName(name: String): Int? {
         val icon = when(name) {
             "bug" -> R.drawable.type_bug
             "dark" -> R.drawable.type_dark
@@ -66,9 +67,10 @@ class TypeAdapter(
             "fairy" -> R.drawable.type_fairy
             "fighting" -> R.drawable.type_fighting
             "fire" -> R.drawable.type_fire
+            "water" -> R.drawable.type_water
             "flying" -> R.drawable.type_flying
             "ghost" -> R.drawable.type_ghost
-            "glass" -> R.drawable.type_glass
+            "grass" -> R.drawable.type_grass
             "ground" -> R.drawable.type_ground
             "ice" -> R.drawable.type_ice
             "normal" -> R.drawable.type_normal
@@ -77,7 +79,7 @@ class TypeAdapter(
             "rock" -> R.drawable.type_rock
             "shadow" -> R.drawable.type_shadow
             "steel" -> R.drawable.type_steel
-            else -> {R.drawable.type_water}
+            else -> {null}
         }
 
         return icon
