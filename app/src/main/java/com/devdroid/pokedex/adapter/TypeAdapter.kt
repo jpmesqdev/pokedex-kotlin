@@ -29,7 +29,8 @@ class TypeAdapter(
         init {
             itemView.setOnClickListener {
                 val intent = Intent(context, PokemonActivity::class.java).apply {
-                    putExtra("URL", dataSet[adapterPosition].url)
+                    val typeUrl = dataSet[adapterPosition].url
+                    putExtra("url", typeUrl)
                 }
                 context.startActivity(intent)
             }
