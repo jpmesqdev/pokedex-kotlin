@@ -26,26 +26,27 @@ data class PokemonItem(
 data class PokemonInfo(
     @SerializedName("id") var id: Int = 0,
     @SerializedName("name") var name: String = "",
-    @SerializedName("sprites") var sprites: OtherSprites = OtherSprites()
-    //@SerializedName("types") var types: PokemonLabel = PokemonLabel()
+    @SerializedName("sprites") var sprites: OtherSprites = OtherSprites(),
+    @SerializedName("types") var types: List<PokemonLabel> = listOf(),
 )
 
 data class PokemonLabel(
-    @SerializedName("type") var labels: List<Label> = listOf()
+    @SerializedName("type") var label: Label = Label(),
 )
 
 data class Label(
-    @SerializedName("name") var name: String = ""
+    @SerializedName("name") var name: String = "",
+    @SerializedName("url") var url: String = "",
 )
 
 data class OtherSprites(
-    @SerializedName("other") var other: ArtWork = ArtWork()
+    @SerializedName("other") var other: ArtWork = ArtWork(),
 )
 
 data class ArtWork(
-    @SerializedName("official-artwork") var official_artwork: Sprite = Sprite()
+    @SerializedName("official-artwork") var official_artwork: Sprite = Sprite(),
 )
 
 data class Sprite(
-    @SerializedName("front_default") var front_default: String = ""
+    @SerializedName("front_default") var front_default: String = "",
 )

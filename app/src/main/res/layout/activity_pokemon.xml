@@ -10,24 +10,13 @@
       android:layout_height="match_parent"
       tools:context=".PokemonActivity">
 
-    <TextView
-        android:id="@+id/pokemon_type_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/pokemon_type_title"
-        android:layout_marginTop="16dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/pokemon_rv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         tools:listitem="@layout/pokemon_type_item"
-        app:layout_constraintTop_toBottomOf="@+id/pokemon_type_title"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />

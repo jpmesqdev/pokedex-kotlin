@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/lovej/AndroidStudioProjects/Pokedex/app/src/main/res/drawable/category_gradient_background.xml" value="0.2325" />
+        <entry key="..\:/Users/lovej/AndroidStudioProjects/Pokedex/app/src/main/res/drawable/gradient_dragon.xml" value="0.2515" />
+        <entry key="..\:/Users/lovej/AndroidStudioProjects/Pokedex/app/src/main/res/drawable/gradient_flying.xml" value="0.2515" />
+        <entry key="..\:/Users/lovej/AndroidStudioProjects/Pokedex/app/src/main/res/drawable/gradient_ground.xml" value="0.2515" />
         <entry key="..\:/Users/lovej/AndroidStudioProjects/Pokedex/app/src/main/res/drawable/label_background.xml" value="0.252" />
         <entry key="..\:/Users/lovej/AndroidStudioProjects/Pokedex/app/src/main/res/drawable/pokemon_mock.xml" value="0.196" />
         <entry key="..\:/Users/lovej/AndroidStudioProjects/Pokedex/app/src/main/res/layout/activity_main.xml" value="0.33" />
