@@ -24,6 +24,7 @@ class PokemonActivity : AppCompatActivity() {
         val adapter = PokemonAdapter(pokemonList, this)
         val rv: RecyclerView = findViewById(R.id.pokemon_rv)
 
+        rv.setHasFixedSize(true)
         rv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rv.adapter = adapter
 

@@ -13,6 +13,7 @@
       android:theme="@style/Theme.Pokedex">
     <activity
         android:name=".PokemonActivity"
+        android:hardwareAccelerated="true"
         android:exported="false" />
     <activity
         android:name=".MainActivity"
