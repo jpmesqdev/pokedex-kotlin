@@ -58,9 +58,10 @@ class PokemonAdapter(
                                 .padStart(3, '0'))
                             holder.pokemonName.text = it.name
                             Glide.with(context)
-                                .load(it.sprites.sprite.sprite.default)
+                                .load(it.sprites.other.official_artwork.front_default)
                                 .apply(RequestOptions().override(300, 300))
                                 .into(holder.pokemonImg)
+
                         }
                     }
                 }

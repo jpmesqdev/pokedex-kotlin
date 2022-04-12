@@ -39,13 +39,13 @@ data class Label(
 )
 
 data class OtherSprites(
-    @SerializedName("other") var sprite: ArtWork = ArtWork()
+    @SerializedName("other") var other: ArtWork = ArtWork()
 )
 
 data class ArtWork(
-    @SerializedName("official-artwork") var sprite: Sprite = Sprite()
+    @SerializedName("official-artwork") var official_artwork: Sprite = Sprite()
 )
 
 data class Sprite(
-    @SerializedName("front_default") var default: String = ""
+    @SerializedName("front_default") var front_default: String = ""
 )
