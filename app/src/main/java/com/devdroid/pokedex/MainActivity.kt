@@ -35,7 +35,10 @@ class MainActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         response.body()?.let {
-                            adapter.dataSet = it.pokemonTypeList
+                            val pokemonList = it.pokemonTypeList.filter {
+                                it.name != "shadow" && it.name != "unknown"
+                            }
+                            adapter.dataSet = pokemonList
                             adapter.notifyDataSetChanged()
                         }
                     }
