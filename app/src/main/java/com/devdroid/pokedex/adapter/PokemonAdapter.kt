@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +30,7 @@ class PokemonAdapter(
     var dataSet: List<Pokemon>,
     val context: Context,
 ) : RecyclerView.Adapter<PokemonAdapter.PokemonHolder>() {
+
     class PokemonHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val pokemonImg: ImageView = itemView.findViewById(R.id.pokemon_type_image)
         val pokemonNumber: TextView = itemView.findViewById(R.id.pokemon_type_number)
@@ -38,13 +40,20 @@ class PokemonAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonHolder {
-        val view: View = LayoutInflater.from(parent.context)
-            .inflate(R.layout.pokemon_type_item, parent, false)
+        val view: View =
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.pokemon_type_item, parent, false)
+
         return PokemonHolder(view)
     }
 
     override fun onBindViewHolder(holder: PokemonHolder, position: Int) {
-        val id = dataSet[position].pokemon.url.split("/").dropLast(1).last().toInt()
+
+        val id = dataSet[position].pokemon.url
+            .split("/")
+            .dropLast(1)
+            .last()
+            .toInt()
 
         retrofit().create(PokeApiService::class.java)
             .getPokemonById(id)
@@ -52,8 +61,9 @@ class PokemonAdapter(
                 override fun onResponse(call: Call<PokemonInfo>, response: Response<PokemonInfo>) {
                     if (response.isSuccessful) {
                         response.body()?.let { it ->
+                            val typeArraySize = it.types.size
                             val type1 = it.types[0].label.name
-                            val type2 = if (it.types.size > 1) it.types[1].label.name else null
+                            val type2 = if (typeArraySize > 1) it.types[1].label.name else null
 
                             holder.pokemonNumber.text = String.format("Nº %1\$s", it.id.toString()
                                 .padStart(3, '0'))
@@ -71,58 +81,24 @@ class PokemonAdapter(
 
                             holder.pokemonLabel1.text = type1
 
-                            if (type1 == "dragon" || type1 == "flying" || type1 == "ground") {
-                                holder.pokemonLabel1.setBackgroundResource(getTypeColorGradient(type1))
-                                holder.pokemonLabel1.text = type1
-                                if (it.types.size > 1) {
-                                    holder.pokemonLabel2.text = type2
-                                    if (type2 == "dragon" || type2 == "flying" || type2 == "ground") {
-                                        holder.pokemonLabel2.setBackgroundResource(getTypeColorGradient(type2))
-                                    } else {
-                                        if (type2 != null) {
-                                            changeLabelBackground(context, type2)
-                                            holder.pokemonLabel2.setBackgroundResource(R.drawable.label_background)
-                                        }
-
-                                    }
-                                } else {
-                                    holder.pokemonLabel2.visibility = View.GONE
-                                }
-                            } else {
-                                holder.pokemonLabel1.text = type1
-                                changeLabelBackground(context, type1)
-                                holder.pokemonLabel1.setBackgroundResource(R.drawable.label_background)
-                                if (it.types.size > 1) {
-                                    holder.pokemonLabel2.text = type2
-                                    if (type2 == "dragon" || type2 == "flying" || type2 == "ground") {
-                                        holder.pokemonLabel2.setBackgroundResource(getTypeColorGradient(type2))
-                                    } else {
-                                        if (type2 != null) {
-                                            changeLabelBackground(context, type2)
-                                            holder.pokemonLabel2.setBackgroundResource(R.drawable.label_background)
-                                        }
-                                    }
-                                } else {
-                                    holder.pokemonLabel2.visibility = View.GONE
-                                }
-                            }
+                            applyAccordingToTypes(holder, typeArraySize, type1, type2)
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<PokemonInfo>, t: Throwable) {
-                    Log.i("error", t.message.toString())
+                    Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
                 }
-
-            })
+            }
+        )
     }
 
     override fun getItemCount(): Int {
         return dataSet.size
     }
 
-    fun getTypeColorByName(type: String): Int {
-        val color = when(type) {
+    private fun getTypeColorByName(type: String): Int {
+        return when(type) {
             "bug" -> R.color.bug
             "dark" -> R.color.dark
             "electric" -> R.color.electric
@@ -141,25 +117,70 @@ class PokemonAdapter(
             "steel" -> R.color.steel
             else -> {R.color.white}
         }
-
-        return color
     }
 
-    fun getTypeColorGradient(type: String): Int {
-        val color = when (type) {
+    private fun getTypeColorGradient(type: String): Int {
+        return when (type) {
             "dragon" -> R.drawable.gradient_dragon
             "flying" -> R.drawable.gradient_flying
             "ground" -> R.drawable.gradient_ground
             else -> {R.drawable.category_gradient_background}
         }
-        return color
     }
 
-    fun changeLabelBackground(context: Context, type: String) {
+    private fun changeLabelBackground(context: Context, type: String) {
         val unwrappedDrawable = AppCompatResources.getDrawable(context, R.drawable.label_background)
         val wrappedDrawable = unwrappedDrawable?.let { drawable -> DrawableCompat.wrap(drawable) }
         if (wrappedDrawable != null) {
             DrawableCompat.setTint(wrappedDrawable, context.resources.getColor(getTypeColorByName(type)))
+        }
+    }
+
+    private fun applyAccordingToTypes(
+        holder: PokemonHolder,
+        typeArraySize: Int,
+        type1: String,
+        type2: String?
+    ) {
+        if (type1 == "dragon" || type1 == "flying" || type1 == "ground") {
+            holder.pokemonLabel1
+                .setBackgroundResource(getTypeColorGradient(type1))
+            holder.pokemonLabel1.text = type1
+            if (typeArraySize > 1) {
+                holder.pokemonLabel2.text = type2
+                if (type2 == "dragon" || type2 == "flying" || type2 == "ground") {
+                    holder.pokemonLabel2
+                        .setBackgroundResource(getTypeColorGradient(type2))
+                } else {
+                    if (type2 != null) {
+                        changeLabelBackground(context, type2)
+                        holder.pokemonLabel2
+                            .setBackgroundResource(R.drawable.label_background)
+                    }
+                }
+            } else {
+                holder.pokemonLabel2.visibility = View.GONE
+            }
+        } else {
+            holder.pokemonLabel1.text = type1
+            changeLabelBackground(context, type1)
+            holder.pokemonLabel1
+                .setBackgroundResource(R.drawable.label_background)
+            if (typeArraySize > 1) {
+                holder.pokemonLabel2.text = type2
+                if (type2 == "dragon" || type2 == "flying" || type2 == "ground") {
+                    holder.pokemonLabel2
+                        .setBackgroundResource(getTypeColorGradient(type2))
+                } else {
+                    if (type2 != null) {
+                        changeLabelBackground(context, type2)
+                        holder.pokemonLabel2
+                            .setBackgroundResource(R.drawable.label_background)
+                    }
+                }
+            } else {
+                holder.pokemonLabel2.visibility = View.GONE
+            }
         }
     }
 }

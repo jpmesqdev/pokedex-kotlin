@@ -19,7 +19,6 @@ interface PokeApiService {
 
     @GET("pokemon/{id}")
     fun getPokemonById(@Path("id") id: Int): Call<PokemonInfo>
-
 }
 
 fun retrofit(): Retrofit =

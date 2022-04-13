@@ -45,13 +45,11 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity, t.message, Toast.LENGTH_LONG).show()
                 }
 
-            })
+            }
+        )
     }
-
-
-
-
 }
+
 
 
 

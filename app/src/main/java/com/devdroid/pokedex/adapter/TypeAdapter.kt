@@ -18,11 +18,13 @@ import java.util.*
  */
 class TypeAdapter(
     var dataSet: List<PokemonType>,
-    var context: Context,
+    val context: Context,
     
 ) : RecyclerView.Adapter<TypeAdapter.TypeHolder>() {
 
-    class TypeHolder(itemView: View, context: Context, dataSet: List<PokemonType>) : RecyclerView.ViewHolder(itemView) {
+    class TypeHolder(
+        itemView: View, context: Context, dataSet: List<PokemonType>
+    ) : RecyclerView.ViewHolder(itemView) {
         val typeName: TextView = itemView.findViewById(R.id.type_txt_name)
         val typeImg: ImageView = itemView.findViewById(R.id.type_img)
 
@@ -32,11 +34,10 @@ class TypeAdapter(
                     val typeUrl = dataSet[adapterPosition].url
                     putExtra("url", typeUrl)
                 }
+
                 context.startActivity(intent)
             }
-
         }
-
     }
 
     
@@ -52,6 +53,7 @@ class TypeAdapter(
                 Locale.getDefault()
             ) else it.toString()
         }
+
         getTypeIconByName(dataSet[position].name)?.let { holder.typeImg.setImageResource(it) }
     }
 
@@ -60,7 +62,7 @@ class TypeAdapter(
     }
 
     private fun getTypeIconByName(name: String): Int? {
-        val icon = when(name) {
+        return when(name) {
             "bug" -> R.drawable.type_bug
             "dark" -> R.drawable.type_dark
             "dragon" -> R.drawable.type_dragon
@@ -82,7 +84,5 @@ class TypeAdapter(
             "steel" -> R.drawable.type_steel
             else -> {null}
         }
-
-        return icon
     }
 }
