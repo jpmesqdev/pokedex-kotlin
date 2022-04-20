@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!-- Base application theme. -->
-  <style name="Theme.Pokedex" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+  <style name="Theme.Pokedex" parent="Theme.MaterialComponents.Light.NoActionBar">
     <!-- Primary brand color. -->
     <item name="colorPrimary">@color/black</item>
     <item name="colorPrimaryVariant">@color/black</item>
@@ -13,4 +13,15 @@
     <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
     <!-- Customize your theme here. -->
   </style>
+
+  <style name="Theme.JokerAppDev.AppbarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+  <style name="Theme.JokerAppDev.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+  <style name="Theme.Splash" parent="Theme.SplashScreen">
+    <item name="windowSplashScreenBackground">@color/water</item>
+    <item name="windowSplashScreenAnimatedIcon">@drawable/pokemon_logo_png</item>
+    <item name="windowSplashScreenAnimationDuration">200</item>
+    <item name="postSplashScreenTheme">@style/Theme.Pokedex</item>
+  </style>
+
 </resources>

@@ -3,6 +3,7 @@ package com.devdroid.pokedex
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.devdroid.pokedex.adapter.TypeAdapter
@@ -17,6 +18,7 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         setContentView(R.layout.activity_main)
 
         val rv: RecyclerView = findViewById(R.id.rv_type)
