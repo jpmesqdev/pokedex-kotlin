@@ -74,7 +74,7 @@ class PokemonAdapter(
                                 ) else it.toString()
                             }
 
-                            Glide.with(context)
+                            Glide.with(context.applicationContext)
                                 .load(it.sprites.other.official_artwork.front_default)
                                 .apply(RequestOptions().override(200, 200))
                                 .into(holder.pokemonImg)
